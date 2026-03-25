@@ -21,14 +21,14 @@ class TestLoginCourier:
 
     @allure.title("Проверка кода ответа при использовании неправильного логина") 
     def test_invalid_login_status_code(self,  create_courier):
-        payload ={'login': f"{create_courier['login']}+InvalidDataCourier.login",
+        payload ={'login': "InvalidDataCourier.login",
             'password': create_courier['password']}
         response = requests.post(f'{Urls.url}{Endpoints.login_courier}', data=payload)
         assert response.status_code == 404
 
     @allure.title("Проверка текста ответа при использовании неправильного логина") 
     def test_invalid_login_status_text(self,  create_courier):
-        payload ={'login': f"{create_courier['login']}+InvalidDataCourier.login",
+        payload ={'login': "InvalidDataCourier.login",
             'password': create_courier['password']}
         response = requests.post(f'{Urls.url}{Endpoints.login_courier}', data=payload)
         assert Response.not_found_login in response.text
@@ -36,14 +36,14 @@ class TestLoginCourier:
     @allure.title("Проверка кода ответа при использовании неправильного пароля") 
     def test_invalid_password_status_code(self,  create_courier):
         payload ={'login': create_courier['login'],
-            'password': f"{create_courier['password']}+InvalidDataCourier.password"}
+            'password': "InvalidDataCourier.password"}
         response = requests.post(f'{Urls.url}{Endpoints.login_courier}', data=payload)
         assert response.status_code == 404
 
     @allure.title("Проверка текста ответа при использовании неправильного пароля") 
     def test_invalid_password_status_text(self,  create_courier):
         payload ={'login': create_courier['login'],
-            'password': f"{create_courier['password']}+InvalidDataCourier.password"}
+            'password': "InvalidDataCourier.password"}
         response = requests.post(f'{Urls.url}{Endpoints.login_courier}', data=payload)
         assert Response.not_found_login in response.text
 
