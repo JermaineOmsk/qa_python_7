@@ -25,7 +25,7 @@ class TestCreateCourier:
     def test_cannot_create_duplicate_courier_text(self,check_create_courier):
         response_one = requests.post(f'{Urls.url}{Endpoints.create_courier}', data=check_create_courier)
         response_two = requests.post(f'{Urls.url}{Endpoints.create_courier}', data=check_create_courier)
-        assert  Response.login_already_inuse in response_two.text
+        assert response_two.json()['message'] == Response.login_already_inuse['message']
 
     @allure.title("Параметризованный тест.Проверка кода ответа при создании курьера с отсутствующим логином или паролем")    
     @pytest.mark.parametrize("empty", [
@@ -45,4 +45,4 @@ class TestCreateCourier:
         payload = check_create_courier
         payload.pop(empty)
         response = requests.post(f'{Urls.url}{Endpoints.create_courier}', data=payload)
-        assert Response.bad_request_registration in response.text
+        assert  response.json()['message'] == Response.bad_request_registration['message']
