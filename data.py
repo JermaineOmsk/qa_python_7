@@ -28,12 +28,12 @@ class User:
     rentTime = 5	
     deliveryDate = "2020-06-06"	
     comment = "Привет"
-    color = []       
+     
 
 class Response:
     successful_registration = {'ok':True}
-    bad_request_registration= "Недостаточно данных для создания учетной записи"
-    login_already_inuse = "Этот логин уже используется"
+    bad_request_registration= {"message": "Недостаточно данных для создания учетной записи"}
+    login_already_inuse = {"message": "Этот логин уже используется. Попробуйте другой."}
     created_track = "track"
     orders_list = "orders"
     created_id = "id"
